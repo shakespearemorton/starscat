@@ -1,0 +1,16 @@
+#PBS -lselect=1:ncpus=1:mem=20gb
+#PBS -lwalltime=24:0:0
+#PBS -J 1-30
+
+res="REPLACE"
+
+module load anaconda3/personal
+
+cd $PBS_O_WORKDIR
+mkdir $PBS_ARRAY_INDEX
+cd $PBS_ARRAY_INDEX
+cp ../* .
+sed -e "s/$res/$PBS_ARRAY_INDEX/" _wavelength.py > wavelength.py
+python wavelength.py
+chmod +x ddscat
+./ddscat &> ddscat.out

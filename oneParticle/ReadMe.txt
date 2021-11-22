@@ -1,0 +1,1 @@
+This directory is used to quickly collect a full spectra for one particle. Alter the nano star properties in the '_nanostar.py' file, and the wavelengths of interest in the '_wavelengths.py' file.
