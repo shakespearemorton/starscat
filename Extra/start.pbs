@@ -1,0 +1,17 @@
+#PBS -lselect=1:ncpus=1:mem=20gb
+#PBS -lwalltime=24:0:0
+#PBS -J 1-20
+
+res="REPLACEH"
+
+module load anaconda3/personal
+
+cd $PBS_O_WORKDIR
+rm -r $PBS_ARRAY_INDEX
+mkdir $PBS_ARRAY_INDEX
+cd $PBS_ARRAY_INDEX
+cp ../* .
+sed -e "s/$res/$PBS_ARRAY_INDEX/" nanostars1.py > nanostars.py
+python nanostars.py
+chmod +x ddscat
+./ddscat &> ddscat.out
